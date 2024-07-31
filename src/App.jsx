@@ -65,13 +65,30 @@ export default function App() {
 
 
    console.table(listaPedidos);
+
+   const removerItem = (id)=> {
+     let listaAux = listaPedidos.filter((pedido) => pedido.id !== id );
+
+     let listaAux = listaPedidos.filter((pedido) => {
+        if(pedido.id !== id){
+
+        }else{
+
+        }
+        setPedidos(listaAux);
+        }
+     );
+     }
+
+   }
+
     return (
        <div className="bloco-principal">
         <div className="bloco-produtos">
             {
                 listaProdutos.map((produto) => 
                 <div key={produto.id}> 
-                       <p>{produto.item}</p>
+                       <img src={produto.imagem}/>
                        <button onClick={() => adicionarProdutoPedido(produto)}>Quero</button>
                 </div>
                 )
@@ -80,12 +97,21 @@ export default function App() {
        <div className="bloco-pedidos">
         <p>Meus Pedidos</p>
         {
-            listaPedidos.map((produto) => 
-            <table>
-                <th></th>
-                <tr>{produto.item}</tr>
-                <td>{produto.preco}</td>
-            </table>
+            listaPedidos.map((pedido) => 
+            <table key={pedido.id}>
+                <tr>
+                <td>
+                {pedido.item}
+                </td>
+                <td>
+                {pedido.preco}
+                </td>
+                <td>
+                    <button onClick={()=> removerItem(pedido.id)}>Remover</button>
+                </td>
+                </tr>
+                </table>
+                
             )
         }
        </div>
