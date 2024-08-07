@@ -67,20 +67,20 @@ export default function App() {
    console.table(listaPedidos);
 
    const removerItem = (id)=> {
-     let listaAux = listaPedidos.filter((pedido) => pedido.id !== id );
-
-     let listaAux = listaPedidos.filter((pedido) => {
-        if(pedido.id !== id){
-
+     let listaAux = listaPedidos.filter((pedido, index) => {
+    
+        if(index !== id){
+       return pedidos
         }else{
-
+       return null;
         }
-        setPedidos(listaAux);
-        }
-     );
+       
+    }
+    );
+     setPedidos(listaAux);
      }
-
-   }
+    
+   
 
     return (
        <div className="bloco-principal">
@@ -97,7 +97,7 @@ export default function App() {
        <div className="bloco-pedidos">
         <p>Meus Pedidos</p>
         {
-            listaPedidos.map((pedido) => 
+            listaPedidos.map((pedido,index) => 
             <table key={pedido.id}>
                 <tr>
                 <td>
@@ -107,7 +107,7 @@ export default function App() {
                 {pedido.preco}
                 </td>
                 <td>
-                    <button onClick={()=> removerItem(pedido.id)}>Remover</button>
+                    <button onClick={()=> removerItem(index)}>Remover</button>
                 </td>
                 </tr>
                 </table>
@@ -117,4 +117,5 @@ export default function App() {
        </div>
        </div>
     );
-}
+    
+    }
